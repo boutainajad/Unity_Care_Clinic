@@ -1,22 +1,18 @@
 <?php
 include '../config/connexion.php';
 
-// Patients count
 $sqlPatients = "SELECT COUNT(*) as total FROM patients";
 $resultPatients = mysqli_query($conn, $sqlPatients);
 $patientsCount = mysqli_fetch_assoc($resultPatients)['total'];
 
-// Doctors count
 $sqlDoctors = "SELECT COUNT(*) as total FROM doctors";
 $resultDoctors = mysqli_query($conn, $sqlDoctors);
 $doctorsCount = mysqli_fetch_assoc($resultDoctors)['total'];
 
-// Departments count
 $sqlDepartments = "SELECT COUNT(*) as total FROM departments";
 $resultDepartments = mysqli_query($conn, $sqlDepartments);
 $departmentsCount = mysqli_fetch_assoc($resultDepartments)['total'];
 
-// Fetch patients list
 $sqlList = "SELECT first_name, last_name, phone_number, email FROM patients";
 $resultList = mysqli_query($conn, $sqlList);
 ?>
