@@ -15,6 +15,7 @@ $departmentsCount = mysqli_fetch_assoc($resultDepartments)['total'];
 
 $sqlList = "SELECT first_name, last_name, phone_number, email FROM patients";
 $resultList = mysqli_query($conn, $sqlList);
+
 ?>
 
 <!DOCTYPE html>
