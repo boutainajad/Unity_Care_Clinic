@@ -1,5 +1,5 @@
-   <?php
-require_once '../config/connexion.php';
+<?php
+include '../config/connexion.php';
 
 // Patients count
 $sqlPatients = "SELECT COUNT(*) as total FROM patients";
@@ -16,10 +16,11 @@ $sqlDepartments = "SELECT COUNT(*) as total FROM departments";
 $resultDepartments = mysqli_query($conn, $sqlDepartments);
 $departmentsCount = mysqli_fetch_assoc($resultDepartments)['total'];
 
-// patients list
+// Fetch patients list
 $sqlList = "SELECT first_name, last_name, phone_number, email FROM patients";
 $resultList = mysqli_query($conn, $sqlList);
 ?>
+
 <!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -44,6 +45,10 @@ $resultList = mysqli_query($conn, $sqlList);
 
     <main class="main">
 
+        <header class="topbar">
+            <input type="text" placeholder="Search...">
+            <div class="profile">Admin</div>
+        </header>
 
         <section class="cards">
             <div class="card">
