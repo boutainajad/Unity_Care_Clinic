@@ -158,9 +158,7 @@
             <li><a href="/Unity_Care_Clinic/pages/patients.php">Patients</a></li>
             <li><a href="/Unity_Care_Clinic/pages/departments.php">Departments</a></li>
         </ul>
-        <div style="margin-top: 30px;">
-            <strong>Admin</strong>
-        </div>
+       
     </div>
     
     <div class="main-content">
