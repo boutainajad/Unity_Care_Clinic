@@ -8,7 +8,7 @@ require_once '../config/connexion.php';
     <h1>Departments List</h1>
     <button class="btn-add" onclick="window.location.href='add_department.php'">+ Add Department</button>
 </div>
-
+ 
 <div class="content-section">
     <table>
         <thead>
