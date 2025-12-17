@@ -97,110 +97,122 @@ include '../../includes/header.php';
 </div>
 
 <style>
-   .btn-back {
-    background-color: #95a5a6;
-    color: white;
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.header h1 {
+    margin: 0;
+    color: #333;
+}
+
+.btn-back {
+    background-color: #6c757d;
+    color: #fff;
     border: none;
-    padding: 10px 20px;
-    border-radius: 5px;
+    padding: 8px 14px;
+    border-radius: 4px;
     cursor: pointer;
-    font-size: 16px;
-    transition: background-color 0.3s;
 }
 
 .btn-back:hover {
-    background-color: #7f8c8d;
+    background-color: #5a6268;
 }
 
-.alert {
-    padding: 15px;
-    margin-bottom: 20px;
-    border-radius: 5px;
+.content-section {
+    max-width: 800px;
+    margin: auto;
+    background: #fff;
+    padding: 25px;
+    border-radius: 6px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
 }
 
 .alert-error {
     background-color: #f8d7da;
-    color: #721c24;
-    border: 1px solid #f5c6cb;
+    color: #842029;
+    padding: 10px;
+    border-radius: 4px;
+    margin-bottom: 15px;
 }
 
 .form-container {
-    max-width: 800px;
-    margin: 0 auto;
-}
-
-.form-row {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 20px;
-    margin-bottom: 20px;
-}
-
-.form-group {
     display: flex;
     flex-direction: column;
 }
 
+.form-row {
+    display: flex;
+    gap: 15px;
+}
+
+.form-group {
+    flex: 1;
+    margin-bottom: 15px;
+}
+
 .form-group label {
-    margin-bottom: 8px;
-    font-weight: bold;
-    color: #2c3e50;
+    font-weight: 600;
+    margin-bottom: 5px;
+    display: block;
 }
 
 .form-group input,
 .form-group select,
 .form-group textarea {
-    padding: 10px;
-    border: 1px solid #ddd;
-    border-radius: 5px;
-    font-size: 14px;
+    width: 100%;
+    padding: 8px 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+.form-group textarea {
+    resize: vertical;
 }
 
 .form-group input:focus,
 .form-group select:focus,
 .form-group textarea:focus {
     outline: none;
-    border-color: #3498db;
+    border-color: #007bff;
 }
 
 .form-actions {
     display: flex;
     gap: 10px;
-    margin-top: 30px;
+    margin-top: 20px;
 }
 
 .btn-submit {
-    background-color: #27ae60;
+    background-color: #28a745;
     color: white;
     border: none;
-    padding: 12px 30px;
-    border-radius: 5px;
+    padding: 10px 16px;
+    border-radius: 4px;
     cursor: pointer;
-    font-size: 16px;
-    font-weight: bold;
-    transition: background-color 0.3s;
 }
 
 .btn-submit:hover {
-    background-color: #229954;
+    background-color: #1e7e34;
 }
 
 .btn-cancel {
-    background-color: #e74c3c;
+    background-color: #dc3545;
     color: white;
     border: none;
-    padding: 12px 30px;
-    border-radius: 5px;
+    padding: 10px 16px;
+    border-radius: 4px;
     cursor: pointer;
-    font-size: 16px;
-    transition: background-color 0.3s;
 }
 
 .btn-cancel:hover {
-    background-color: #c0392b;
+    background-color: #b02a37;
 }
-
 </style>
+
 
 <?php
 include '../../includes/footer.php';

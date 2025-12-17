@@ -78,98 +78,108 @@ include '../../includes/header.php';
 </div>
 
 <style>
-    .btn-back {
-        background-color: #95a5a6;
-        color: white;
-        border: none;
-        padding: 10px 20px;
-        border-radius: 5px;
-        cursor: pointer;
-        font-size: 16px;
-        transition: background-color 0.3s;
-    }
-    
-    .btn-back:hover {
-        background-color: #7f8c8d;
-    }
-    
-    .alert {
-        padding: 15px;
-        margin-bottom: 20px;
-        border-radius: 5px;
-    }
-    
-    .alert-error {
-        background-color: #f8d7da;
-        color: #721c24;
-        border: 1px solid #f5c6cb;
-    }
-    
-    .form-container {
-        max-width: 600px;
-    }
-    
-    .form-group {
-        display: flex;
-        flex-direction: column;
-        margin-bottom: 20px;
-    }
-    
-    .form-group label {
-        margin-bottom: 8px;
-        font-weight: bold;
-        color: #2c3e50;
-    }
-    
-    .form-group input {
-        padding: 10px;
-        border: 1px solid #ddd;
-        border-radius: 5px;
-        font-size: 14px;
-    }
-    
-    .form-group input:focus {
-        outline: none;
-        border-color: #3498db;
-    }
-    
-    .form-actions {
-        display: flex;
-        gap: 10px;
-        margin-top: 30px;
-    }
-    
-    .btn-submit {
-        background-color: #3498db;
-        color: white;
-        border: none;
-        padding: 12px 30px;
-        border-radius: 5px;
-        cursor: pointer;
-        font-size: 16px;
-        font-weight: bold;
-        transition: background-color 0.3s;
-    }
-    
-    .btn-submit:hover {
-        background-color: #2980b9;
-    }
-    
-    .btn-cancel {
-        background-color: #e74c3c;
-        color: white;
-        border: none;
-        padding: 12px 30px;
-        border-radius: 5px;
-        cursor: pointer;
-        font-size: 16px;
-        transition: background-color 0.3s;
-    }
-    
-    .btn-cancel:hover {
-        background-color: #c0392b;
-    }
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.header h1 {
+    margin: 0;
+    color: #333;
+}
+
+.btn-back {
+    background-color: #6c757d;
+    color: #fff;
+    border: none;
+    padding: 8px 14px;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.btn-back:hover {
+    background-color: #5a6268;
+}
+
+.content-section {
+    max-width: 600px;
+    margin: auto;
+    background: #fff;
+    padding: 25px;
+    border-radius: 6px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+}
+
+.alert-error {
+    background-color: #f8d7da;
+    color: #842029;
+    padding: 10px;
+    border-radius: 4px;
+    margin-bottom: 15px;
+}
+
+.form-container {
+    display: flex;
+    flex-direction: column;
+}
+
+.form-group {
+    margin-bottom: 15px;
+}
+
+.form-group label {
+    font-weight: 600;
+    margin-bottom: 5px;
+    display: block;
+}
+
+.form-group input {
+    width: 100%;
+    padding: 8px 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+.form-group input:focus {
+    outline: none;
+    border-color: #007bff;
+}
+
+.form-actions {
+    display: flex;
+    gap: 10px;
+    margin-top: 20px;
+}
+
+.btn-submit {
+    background-color: #28a745;
+    color: white;
+    border: none;
+    padding: 10px 16px;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.btn-submit:hover {
+    background-color: #1e7e34;
+}
+
+.btn-cancel {
+    background-color: #dc3545;
+    color: white;
+    border: none;
+    padding: 10px 16px;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.btn-cancel:hover {
+    background-color: #b02a37;
+}
 </style>
+
 
 <?php
 include '../../includes/footer.php';
