@@ -6,9 +6,9 @@ require_once '../config/connexion.php';
 
 <div class="header">
     <h1>Departments List</h1>
-    <button class="btn-add" onclick="window.location.href='add_department.php'">+ Add Department</button>
+    <button class="btn-add" onclick="window.location.href='../actions/departments/add_department.php'">+ Add Department</button>
 </div>
- 
+
 <div class="content-section">
     <table>
         <thead>
@@ -34,7 +34,7 @@ require_once '../config/connexion.php';
                     echo "<td>" . htmlspecialchars($row['location']) . "</td>";
                     echo "<td>" . htmlspecialchars($row['doctor_count']) . "</td>";
                     echo "<td class='action-buttons'>";
-                    echo "<button class='btn-edit' onclick=\"window.location.href='edit_department.php?id=" . $row['department_id'] . "'\">Edit</button>";
+                    echo "<button class='btn-edit' onclick=\"window.location.href='../actions/departments/edit_department.php?id=" . $row['department_id'] . "'\">Edit</button>";
                     echo "<button class='btn-delete' onclick=\"confirmDelete(" . $row['department_id'] . ")\">Delete</button>";
                     echo "</td>";
                     echo "</tr>";
@@ -52,7 +52,7 @@ require_once '../config/connexion.php';
 <script>
 function confirmDelete(id) {
     if (confirm('Are you sure you want to delete this department?')) {
-        window.location.href = 'delete_department.php?id=' + id;
+        window.location.href = '../actions/departments/delete_department.php?id=' + id;
     }
 }
 </script>

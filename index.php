@@ -11,7 +11,8 @@ $total_patients = $conn->query("SELECT COUNT(*) as count FROM patients")->fetch_
 $total_doctors = $conn->query("SELECT COUNT(*) as count FROM doctors")->fetch_assoc()['count'];
 $total_departments = $conn->query("SELECT COUNT(*) as count FROM departments")->fetch_assoc()['count'];
 $labels =  $conn->query("SELECT  department_name FROM departments")->fetch_all();
-// print_r($labels);
+// print_r($labels);  
+
 $sql = "SELECT COUNT(doc.doctor_id) as doctor_count 
                     FROM departments d
                     LEFT JOIN doctors doc ON d.department_id = doc.department_id
