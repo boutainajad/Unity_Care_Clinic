@@ -20,7 +20,7 @@ $sql = "SELECT COUNT(doc.doctor_id) as doctor_count
 $medecinsParDepartement = $conn->query($sql)->fetch_all();
 
 
-
+  
 ?>
 
 <div class="header">
