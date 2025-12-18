@@ -1,4 +1,4 @@
- <?php
+<?php
 require_once '../../config/connexion.php';
 
 $error = "";
@@ -12,29 +12,42 @@ if ($dept_result->num_rows > 0) {
     }
 }
 
-if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-    $first_name = $_POST['first_name'];
-    $last_name = $_POST['last_name'];
-    $specialisation = $_POST['specialisation'];
-    $phone_number = $_POST['phone_number'];
-    $email = $_POST['email'];
-    $department_id = $_POST['department_id'];
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    $first_name    = trim($_POST['first_name'] ?? '');
+    $last_name     = trim($_POST['last_name'] ?? '');
+    $specialisation= trim($_POST['specialisation'] ?? '');
+    $phone_number  = trim($_POST['phone_number'] ?? '');
+    $email         = trim($_POST['email'] ?? '');
+    $department_id = $_POST['department_id'] ?? '';
 
-    $sql = "INSERT INTO doctors (firs_name, last_name, specialisation, phone_number, email, department_id) VALUES (?, ?, ?, ?, ?, ?)";
-    $stmt = $conn->prepare($sql);
-    $stmt->bind_param("sssssi", $first_name, $last_name, $specialisation, $phone_number, $email, $department_id);
-
-    if ($stmt->execute()) {
-        $stmt->close();
-        $conn->close();
-        header("Location: ../../pages/doctors.php");
-        exit();
-    } else {
-        $error = "Error: " . $conn->error;
+    if (empty($first_name) || empty($last_name) || empty($specialisation) || empty($department_id)) {
+        $error = "Please fill in all required fields.";
+    }
+    elseif (!empty($email) && !filter_var($email, FILTER_VALIDATE_EMAIL)) {
+        $error = "Invalid email address.";
+    }
+    elseif (!empty($phone_number) && !preg_match('/^[0-9]{10}$/', $phone_number)) {
+        $error = "Phone number must contain exactly 10 digits.";
     }
 
-    $stmt->close();
-    $conn->close();
+    if (empty($error)) {
+        $sql = "INSERT INTO doctors 
+                (firs_name, last_name, specialisation, phone_number, email, department_id) 
+                VALUES (?, ?, ?, ?, ?, ?)";
+        $stmt = $conn->prepare($sql);
+        $stmt->bind_param("sssssi", $first_name, $last_name, $specialisation, $phone_number, $email, $department_id);
+
+        if ($stmt->execute()) {
+            $stmt->close();
+            $conn->close();
+            header("Location: ../../pages/doctors.php");
+            exit();
+        } else {
+            $error = "Database error: " . $conn->error;
+        }
+        $stmt->close();
+        $conn->close();
+    }
 }
 
 include '../../includes/header.php';
@@ -42,7 +55,7 @@ include '../../includes/header.php';
 
 <div class="header">
     <h1>Add New Doctor</h1>
-    <button class="btn-back" onclick="window.location.href='doctors.php'">← Back to List</button>
+    <button class="btn-back" onclick="window.location.href='../../pages/doctors.php'">← Back to List</button>
 </div>
 
 <div class="content-section">
@@ -53,17 +66,17 @@ include '../../includes/header.php';
     <form method="POST" action="" class="form-container">
         <div class="form-group">
             <label for="first_name">First Name *</label>
-            <input type="text" id="first_name" name="first_name" required>
+            <input type="text" id="first_name" name="first_name">
         </div>
 
         <div class="form-group">
             <label for="last_name">Last Name *</label>
-            <input type="text" id="last_name" name="last_name" required>
+            <input type="text" id="last_name" name="last_name">
         </div>
 
         <div class="form-group">
             <label for="specialisation">Specialisation *</label>
-            <input type="text" id="specialisation" name="specialisation" required>
+            <input type="text" id="specialisation" name="specialisation">
         </div>
 
         <div class="form-group">
@@ -78,7 +91,7 @@ include '../../includes/header.php';
 
         <div class="form-group">
             <label for="department_id">Department *</label>
-            <select id="department_id" name="department_id" required>
+            <select id="department_id" name="department_id" >
                 <option value="">Select Department</option>
                 <?php foreach($departments as $dept): ?>
                     <option value="<?= $dept['department_id'] ?>"><?= $dept['department_name'] ?></option>

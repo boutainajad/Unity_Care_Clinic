@@ -3,31 +3,54 @@ require_once '../../config/connexion.php';
 
 $error = "";
 
-if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-    $first_name = $_POST['first_name'];
-    $last_name = $_POST['last_name'];
-    $gender = $_POST['genre'];
-    $date_of_birth = $_POST['date_of_birth'];
-    $phone_number = $_POST['phone_number'];
-    $email = $_POST['email'];
-    $adress = $_POST['adress'];
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
-    $sql = "INSERT INTO patients (first_name, last_name, genre, date_of_birth, phone_number, email, adress) 
-            VALUES (?, ?, ?, ?, ?, ?, ?)";
+    $first_name     = trim($_POST['first_name'] ?? '');
+    $last_name      = trim($_POST['last_name'] ?? '');
+    $gender         = $_POST['genre'] ?? '';
+    $date_of_birth  = $_POST['date_of_birth'] ?? '';
+    $phone_number   = trim($_POST['phone_number'] ?? '');
+    $email          = trim($_POST['email'] ?? '');
+    $adress         = trim($_POST['adress'] ?? '');
 
-    $stmt = $conn->prepare($sql);
-    $stmt->bind_param("sssssss", $first_name, $last_name, $gender, $date_of_birth, $phone_number, $email, $adress);
-
-    if ($stmt->execute()) {
-        $stmt->close();
-        $conn->close();
-        header("Location: ../../pages/patients.php");
-        exit();
-    } else {
-        $error = "Error: " . $conn->error;
-        $stmt->close();
-        $conn->close();
+    if (empty($first_name) || empty($last_name) || empty($gender) ||
+        empty($date_of_birth) || empty($phone_number) || empty($email) || empty($adress)) {
+        $error = "All fields are required.";
     }
+    elseif (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+        $error = "Invalid email address.";
+    }
+    elseif (!preg_match('/^[0-9]{10}$/', $phone_number)) {
+        $error = "Phone number must contain exactly 10 digits.";
+    }
+
+    if (empty($error)) {
+        $sql = "INSERT INTO patients 
+                (first_name, last_name, genre, date_of_birth, phone_number, email, adress)
+                VALUES (?, ?, ?, ?, ?, ?, ?)";
+
+        $stmt = $conn->prepare($sql);
+        $stmt->bind_param(
+            "sssssss",
+            $first_name,
+            $last_name,
+            $gender,
+            $date_of_birth,
+            $phone_number,
+            $email,
+            $adress
+        );
+
+        if ($stmt->execute()) {
+            header("Location: ../../pages/patients.php");
+            exit();
+        } else {
+            $error = "Database error: " . $conn->error;
+        }
+        $stmt->close();
+    }
+
+    $conn->close();
 }
 
 include '../../includes/header.php';
@@ -47,12 +70,11 @@ include '../../includes/header.php';
         <div class="form-row">
             <div class="form-group">
                 <label for="first_name">First Name *</label>
-                <input type="text" id="first_name" name="first_name" required>
+                <input type="text" id="first_name" name="first_name">
             </div>
-            
             <div class="form-group">
                 <label for="last_name">Last Name *</label>
-                <input type="text" id="last_name" name="last_name" required>
+                <input type="text" id="last_name" name="last_name">
             </div>
         </div>
         
@@ -65,28 +87,26 @@ include '../../includes/header.php';
                     <option value="Female">Female</option>
                 </select>
             </div>
-            
             <div class="form-group">
                 <label for="date_of_birth">Date of Birth *</label>
-                <input type="date" id="date_of_birth" name="date_of_birth" required>
+                <input type="date" id="date_of_birth" name="date_of_birth">
             </div>
         </div>
         
         <div class="form-row">
             <div class="form-group">
                 <label for="phone_number">Phone Number *</label>
-                <input type="tel" id="phone_number" name="phone_number" required>
+                <input type="tel" id="phone_number" name="phone_number">
             </div>
-            
             <div class="form-group">
                 <label for="email">Email *</label>
-                <input type="email" id="email" name="email" required>
+                <input type="email" id="email" name="email">
             </div>
         </div>
         
         <div class="form-group">
             <label for="adress">Address *</label>
-            <textarea id="adress" name="adress" rows="3" required></textarea>
+            <textarea id="adress" name="adress" rows="3"></textarea>
         </div>
         
         <div class="form-actions">
@@ -214,7 +234,6 @@ include '../../includes/header.php';
 
 
 </style>
-
 
 <?php
 include '../../includes/footer.php';

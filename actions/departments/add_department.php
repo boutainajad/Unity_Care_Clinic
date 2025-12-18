@@ -3,26 +3,31 @@ require_once '../../config/connexion.php';
 
 $error = "";
 
-if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-    $department_name = $_POST['department_name'];
-    $location = $_POST['location'];
-    
-    $sql = "INSERT INTO departments (department_name, location) VALUES (?, ?)";
-    
-    $stmt = $conn->prepare($sql);
-    $stmt->bind_param("ss", $department_name, $location);
-    
-    if ($stmt->execute()) {
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    $department_name = trim($_POST['department_name'] ?? '');
+    $location        = trim($_POST['location'] ?? '');
+
+    if (empty($department_name) || empty($location)) {
+        $error = "Please fill in all required fields.";
+    }
+
+    if (empty($error)) {
+        $sql = "INSERT INTO departments (department_name, location) VALUES (?, ?)";
+        $stmt = $conn->prepare($sql);
+        $stmt->bind_param("ss", $department_name, $location);
+
+        if ($stmt->execute()) {
+            $stmt->close();
+            $conn->close();
+            header("Location: ../../pages/departments.php");
+            exit();
+        } else {
+            $error = "Database error: " . $conn->error;
+        }
+
         $stmt->close();
         $conn->close();
-        header("Location: ../../pages/departments.php");
-        exit();
-    } else {
-        $error = "Error: " . $conn->error;
     }
-    
-    $stmt->close();
-    $conn->close();
 }
 
 include '../../includes/header.php';
@@ -41,12 +46,12 @@ include '../../includes/header.php';
     <form method="POST" action="" class="form-container">
         <div class="form-group">
             <label for="department_name">Department Name *</label>
-            <input type="text" id="department_name" name="department_name" required>
+            <input type="text" id="department_name" name="department_name" >
         </div>
         
         <div class="form-group">
             <label for="location">Location *</label>
-            <input type="text" id="location" name="location" required>
+            <input type="text" id="location" name="location" >
         </div>
         
         <div class="form-actions">
@@ -157,8 +162,6 @@ include '../../includes/header.php';
     background-color: #b02a37;
 }
 </style>
-
-
 <?php
 include '../../includes/footer.php';
 ?>
