@@ -34,7 +34,7 @@ require_once '../config/connexion.php';
                     echo "<td>" . htmlspecialchars($row['specialisation']) . "</td>";
                     echo "<td>" . htmlspecialchars($row['phone_number']) . "</td>";
                     echo "<td>" . htmlspecialchars($row['email']) . "</td>";
-                    echo "<td>" . htmlspecialchars($row['department_name'] ?? 'N/A') . "</td>";
+                    echo "<td>" . htmlspecialchars($row['department_name'] ?? 'No Department') . "</td>";
                     echo "<td class='action-buttons'>";
                     echo "<button class='btn-edit' onclick=\"window.location.href='../actions/doctors/edit_doctors.php?id=" . $row['doctor_id'] . "'\">Edit</button>";
                     echo "<button class='btn-delete' onclick=\"confirmDelete(" . $row['doctor_id'] . ")\">Delete</button>";

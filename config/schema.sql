@@ -23,9 +23,8 @@ CREATE TABLE doctors (
     specialisation VARCHAR(50),
     phone_number VARCHAR(15),
     email VARCHAR(100),
-    department_id INT(11),
-    CONSTRAINT fk_doctors_departments
+    department_id INT(11) ,
         FOREIGN KEY (department_id)
         REFERENCES departments(department_id)
-        ON DELETE CASCADE
+        ON DELETE set NULL
 );
