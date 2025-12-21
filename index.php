@@ -1,11 +1,10 @@
 <?php
+require_once 'auth_check.php';
 include 'includes/header.php';
 require_once 'config/connexion.php';
 
 $labels = [];
 $medecinsParDepartement = [];
-
-
 
 $total_patients = $conn->query("SELECT COUNT(*) as count FROM patients")->fetch_assoc()['count'];
 $total_doctors = $conn->query("SELECT COUNT(*) as count FROM doctors")->fetch_assoc()['count'];
@@ -17,9 +16,6 @@ $sql = "SELECT COUNT(doc.doctor_id) as doctor_count
                     LEFT JOIN doctors doc ON d.department_id = doc.department_id
                     GROUP BY d.department_id;";
 $medecinsParDepartement = $conn->query($sql)->fetch_all();
-
-
-  
 ?>
 
 <div class="header">

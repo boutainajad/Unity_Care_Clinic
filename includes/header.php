@@ -1,3 +1,6 @@
+<?php
+require_once __DIR__ . '/../auth_check.php';
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -51,6 +54,39 @@
         
         .sidebar ul li a:hover {
             background-color: #34495e;
+        }
+
+        .sidebar-footer {
+            position: absolute;
+            bottom: 20px;
+            left: 20px;
+            right: 20px;
+            padding-top: 20px;
+            border-top: 1px solid #34495e;
+        }
+
+        .user-info {
+            color: #bdc3c7;
+            font-size: 14px;
+            margin-bottom: 10px;
+        }
+
+        .btn-logout {
+            display: block;
+            width: 100%;
+            background-color: #e74c3c;
+            color: white;
+            border: none;
+            padding: 10px;
+            border-radius: 5px;
+            cursor: pointer;
+            text-decoration: none;
+            text-align: center;
+            transition: background-color 0.3s;
+        }
+
+        .btn-logout:hover {
+            background-color: #c0392b;
         }
         
         .main-content {
@@ -158,7 +194,13 @@
             <li><a href="/Unity_Care_Clinic/pages/patients.php">Patients</a></li>
             <li><a href="/Unity_Care_Clinic/pages/departments.php">Departments</a></li>
         </ul>
-       
+        
+        <div class="sidebar-footer">
+            <div class="user-info">
+                Logged in as: <strong><?php echo htmlspecialchars($_SESSION['username']); ?></strong>
+            </div>
+            <a href="/Unity_Care_Clinic/logout.php" class="btn-logout">Logout</a>
+        </div>
     </div>
     
     <div class="main-content">
